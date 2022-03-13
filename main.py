@@ -1,6 +1,7 @@
+import argparse
+
 from src.tondeuse import MowerClass
 from src.utils import LOGGER, preprocess_file
-import argparse
 
 
 def get_arguments():
@@ -15,10 +16,10 @@ def main(filename):
     result = {}
     occupied = []
     for mower_id, mower_config in mowers.items():
-        LOGGER.info("Mower {} - process started.".format(mower_id))
+        LOGGER.info("Mower %s - process started.", mower_id)
         my_mower = MowerClass(mower_id, mower_config["limits"], mower_config["pos"], mower_config["dir"])
         for command in mower_config["commands"]:
-            LOGGER.info("Running command {}.".format(command))
+            LOGGER.info("Running command %s.", command)
             if command == "A":
                 my_mower.next_pos(occupied)
             elif command == "D":
@@ -26,8 +27,7 @@ def main(filename):
             elif command == "G":
                 my_mower.next_dir_g()
             else:
-                LOGGER.warn("Invalid command {}.".format(command))
-                pass
+                LOGGER.warning("Invalid command %s.", command)
         result[mower_id] = {"pos": my_mower.pos, "dir": my_mower.dir}
         occupied.append(my_mower.pos)
     print(result)

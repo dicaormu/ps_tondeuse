@@ -1,10 +1,5 @@
 # Main constructors: field and MowerClass
-from src.utils import LOGGER
-
-
-class PositionError(Exception):
-    """Custom exception to validate positions"""
-    pass
+from src.utils import LOGGER, PositionError
 
 
 class FieldClass:
@@ -20,8 +15,8 @@ class FieldClass:
         """
         FieldClass.max_x = int(limits[0])
         FieldClass.max_y = int(limits[1])
-        LOGGER.info("Successfully initialized field params: O({}; {}), L({}; {}).".format(self.min_x, self.min_y,
-                                                                                          limits[0], limits[1]))
+        LOGGER.info("Successfully initialized field params: O(%s; %s), L(%s; %s).",
+                    self.min_x, self.min_y, limits[0], limits[1])
 
 
 class MowerClass(FieldClass):
@@ -32,30 +27,30 @@ class MowerClass(FieldClass):
         """
         Initializes mowers class and movements
         :param mower_id: Id of the mower
-        :param pos: Position of the mower as a list [x, y] 
-        :param dir: orientation among following list: N,E,W,S
+        :param pos: Position of the mower as a list [x, y]
+        :param dir_: orientation among following list: N,E,W,S
         """
         # id of the MowerClass
         super().__init__(limits)
         self.mower_id = mower_id
         self.pos = pos
         self.dir = dir_
-        LOGGER.info("Successfully initialized mower: Id {}.".format(mower_id))
+        LOGGER.info("Successfully initialized mower: Id %s.", mower_id)
 
     def display_pos(self):
         """
         Prints mower position and returns coordinates.
         """
-        print("Mower {} position is in ({}; {}; {}).".format(self.mower_id, self.pos[0], self.pos[1], self.dir))
+        print("Mower %s position is in (%s; %s; %s).", self.mower_id, self.pos[0], self.pos[1], self.dir)
 
     def is_valid(self, pos):
         """
-        Checks if position is valid according to field limits or position occupation by another mower
+        Checks if position is valid according to field limits
         :param pos: actual position [x, y, 0]
         :return: raise error or pass
         """
         # Position within field
-        if pos[0] in range(self.min_x, self.max_x+1) and pos[1] in range(self.min_y, self.max_y+1):
+        if pos[0] in range(self.min_x, self.max_x + 1) and pos[1] in range(self.min_y, self.max_y + 1):
             pass
         else:
             raise PositionError
@@ -69,42 +64,38 @@ class MowerClass(FieldClass):
         new_pos = self.pos
         if self.dir == "N":
             try:
-                new_pos = [self.pos[0], self.pos[1]+1]
+                new_pos = [self.pos[0], self.pos[1] + 1]
                 self.is_valid(new_pos)
                 is_occupied(new_pos, occupied)
             except PositionError:
                 LOGGER.info("Position not valid or occupied ... Skipping command.")
                 new_pos = self.pos
-                pass
         if self.dir == "E":
             try:
-                new_pos = [self.pos[0]+1, self.pos[1]]
+                new_pos = [self.pos[0] + 1, self.pos[1]]
                 self.is_valid(new_pos)
                 is_occupied(new_pos, occupied)
             except PositionError:
                 LOGGER.info("Position not valid or occupied ... Skipping command.")
                 new_pos = self.pos
-                pass
         if self.dir == "W":
             try:
-                new_pos = [self.pos[0]-1, self.pos[1]]
+                new_pos = [self.pos[0] - 1, self.pos[1]]
                 self.is_valid(new_pos)
                 is_occupied(new_pos, occupied)
             except PositionError:
                 LOGGER.info("Position not valid or occupied ... Skipping command.")
                 new_pos = self.pos
-                pass
         if self.dir == "S":
             try:
-                new_pos = [self.pos[0], self.pos[1]-1]
+                new_pos = [self.pos[0], self.pos[1] - 1]
                 self.is_valid(new_pos)
                 is_occupied(new_pos, occupied)
             except PositionError:
                 LOGGER.info("Position not valid or occupied ... Skipping command.")
                 new_pos = self.pos
-                pass
         self.pos = new_pos
-        LOGGER.info("Mower position is set to: ({}; {}).".format(self.pos[0], self.pos[1]))
+        LOGGER.info("Mower position is set to: (%s; %s).", self.pos[0], self.pos[1])
 
     def next_dir_g(self):
         """
@@ -121,6 +112,7 @@ class MowerClass(FieldClass):
         elif self.dir == "E":
             dir_ = "N"
         self.dir = dir_
+        LOGGER.info('New position is %s.', self.dir)
 
     def next_dir_d(self):
         """
@@ -137,6 +129,7 @@ class MowerClass(FieldClass):
         elif self.dir == "W":
             dir_ = "N"
         self.dir = dir_
+        LOGGER.info('New position is %s.', self.dir)
 
 
 def is_occupied(pos, occupied=None):
@@ -153,12 +146,9 @@ def is_occupied(pos, occupied=None):
         for pos_ in occupied:
             if pos[:2] == pos_[:2]:
                 raise PositionError
-            else:
-                pass
 
 
 if __name__ == "__main__":
     my_mower = MowerClass(1, [5, 5], [0, 1], "N")
     my_mower.next_pos(occupied=[[0, 2, "N"]])
     # print(my_mower.max_x)
-
