@@ -49,14 +49,14 @@ Also the structure of the test file should always follow requirements below for 
 
 ###### Notes
 
-* This structure is key to understanding the file preprocessing function that has been implemented in the utils.py file.
-* Special characters requirements have to be strictly respected.
+* This structure is key to understanding the file preprocessing function that has been implemented in the utils.py file
+* Special characters requirements have to be strictly respected
 * You can add as many mowers as you want as long as you follow file specifications
 
 #### Main function
 
-The program is design to work with command lines. To run the algorithm given a file (test.txt), one should simply run
-the following command at the root of the project.
+The program is designed to work with command lines. To run the algorithm given a file (here > test.txt), one should
+simply run the following command at the root of the project.
 
     python main.py --file test.txt    
 
