@@ -37,12 +37,6 @@ class MowerClass(FieldClass):
         self.dir = dir_
         LOGGER.info("Successfully initialized mower: Id %s.", mower_id)
 
-    def display_pos(self):
-        """
-        Prints mower position and returns coordinates.
-        """
-        print("Mower %s position is in (%s; %s; %s).", self.mower_id, self.pos[0], self.pos[1], self.dir)
-
     def is_valid(self, pos):
         """
         Checks if position is valid according to field limits
