@@ -16,9 +16,8 @@ This projects contains an implementation of mowing algorithm problem.
 
 ### How to install
 This project has been implemented using python3.8.
-Besides that, there isn't any other requirements which is the reason why the requirements file is here empty.
 
-Find below main commands to setup the project.
+Find below main commands to set up the project **locally**:
 
     git clone https://github.com/moladiop29/ps_tondeuse
     pip install virtualenv #if not already installed
@@ -28,12 +27,16 @@ Find below main commands to setup the project.
 
 For now there isn't any requirement (additional specialized package) to run this project.
 
-### How to use the code
-Once you complete installation of the project, you can start playing around with the projects.
+_To be update in further releases._
 
-See below few precisions regarding test files (to play around) and main function.
+### How to use the code
+
+Once you complete installation of the project, you can start exploring and testing few functions.
+
+See below some notes about test files and main function.
 
 ##### Test file
+
 The project is set up with a data folder where all tests file one would like to use **has to be dropped.**
 Also the structure of the test file should always follow requirements below for the program to work properly
 
@@ -45,16 +48,30 @@ Also the structure of the test file should always follow requirements below for 
     etc.
 
 ###### Notes
+
 * This structure is key to understanding the file preprocessing function that has been implemented in the utils.py file.
 * Special characters requirements have to be strictly respected.
 * You can add as many mowers as you want as long as you follow file specifications
 
+#### Main function
+
+The program is design to work with command lines. To run the algorithm given a file (test.txt), one should simply run
+the following command at the root of the project.
+
+    python main.py --file test.txt    
+
+Even if it has been designed to work this way, feel free to modify the main function to accommodate any use you would
+like.
+
 ### Further notes
+
 Find below some ideas that could be part of the next releases (not implemented due to time constraints):
+
 * Controls of file parsing
 * Unit testing. Actually, we could have approached the project using test driven methods.
 * Implementation of API basically to enable file upload through a simple form or web app (flask for example)
 
 If we were to go full scale with such application, we could add
+
 * Dockerization if we were to deploy this app as a service
 * CI/CD pipelines to enable automated testing as well as deployment into end architecture
