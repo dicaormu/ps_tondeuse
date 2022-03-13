@@ -109,7 +109,7 @@ class MowerClass(FieldClass):
     def next_dir_g(self):
         """
         Switches mower to next direction if command is g
-        :return: position as a list [x, y, O] where 0 is new direction
+        :return: position as a letter amongst N,W,E,S
         """
         dir_ = self.dir
         if self.dir == "N":
@@ -125,7 +125,7 @@ class MowerClass(FieldClass):
     def next_dir_d(self):
         """
         Switches mower to next direction if command is d
-        :return: position as a list [x, y, O] where 0 is new direction
+        :return: position as a letter amongst N,W,E,S
         """
         dir_ = self.dir
         if self.dir == "N":
@@ -144,7 +144,7 @@ def is_occupied(pos, occupied=None):
     Checks if position could be occupied
     :param pos: actual position [x, y, 0]
     :param occupied: list of occupied positions [[x, y, 0], [a, b, 0]]
-    :return: raise error or pass
+    :return: raise PositionError or pass
     """
     # Position within field
     if not occupied:
