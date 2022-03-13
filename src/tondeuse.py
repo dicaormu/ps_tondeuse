@@ -21,7 +21,7 @@ class FieldClass:
         FieldClass.max_x = int(limits[0])
         FieldClass.max_y = int(limits[1])
         LOGGER.info("Successfully initialized field params: O({}; {}), L({}; {}).".format(self.min_x, self.min_y,
-                                                                                            limits[0], limits[1]))
+                                                                                          limits[0], limits[1]))
 
 
 class MowerClass(FieldClass):
